@@ -4,10 +4,11 @@ const jwt = require("jsonwebtoken");
 exports.createUser = (req, res) => {
   postUser(req.body)
     .then((createdUser) => {
+      console.log('Controller', createdUser);
       const jwtSecret = process.env.JWT_SECRET;
-      jwt.sign({ userId: createdUser._id }, jwtSecret, (err, token) => {
+      jwt.sign({ userId: createdUser._id }, jwtSecret, {}, (err, token) => {
         if (err) throw err;
-        res.cookie("token", token).status(201).send("user created");
+        res.cookie("token", token).status(201).send({_id:createdUser._id});
       });
     })
     .catch((err) => {

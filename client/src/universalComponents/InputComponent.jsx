@@ -1,10 +1,10 @@
 import {useContext} from 'react';
 import {LoggedInUserContext} from '../Contexts/LoggedInUserContxt';
-const InputComponent = ({ label, css, ...otherProps }) => {
+const InputComponent = ({ label, labelCss, ...otherProps }) => {
   const { onChangeHandler } = useContext(LoggedInUserContext)
   return (
     <div>
-      <label>{label}</label>
+      <label className ={labelCss}>{label}</label>
       <input {...otherProps} onChange={onChangeHandler} />
     </div>
   );

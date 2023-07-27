@@ -22,30 +22,37 @@ const CreateUser = () => {
     }
   };
   return (
-    <div className="bg-blue-50 h-screen flex items-center">
-      <form className="w-64 mx-auto mb-12" onSubmit={onSubmitHandler}>
+    // className="bg-blue-50 h-screen flex items-center"
+    // className="w-64 mx-auto mb-12"
+    // className={"block w-full rounded-sm p-2 mb-2"}
+    //className={"bg-blue-500 text-white block w-full rounded-sm"}
+    <div >
+      <form className="flex flex-col items-end"  onSubmit={onSubmitHandler}>
         <InputComponent
-          label="Username"
+          label="Username:"
+          labelCss="mr-4"
           name="username"
           type="text"
           placeholder={"username"}
           required
-          className={"block w-full rounded-sm p-2 mb-2"}
+          className="bg-transparent border border-solid border-black p-2 mb-10"
           value={values.username}
         />
         <InputComponent
-          label="Password"
+          label="Password:"
+          labelCss="mr-4"
           name="password"
           type="password"
           placeholder="password"
+          className="bg-transparent border border-solid border-black p-2 mb-5"
           required
-          className={"block w-full rounded-sm p-2 mb-2"}
+
           value={values.password}
         />
         <Button
           type="submit"
           children={"Create User"}
-          className={"bg-blue-500 text-white block w-full rounded-sm"}
+          className="bg-[#5b96f3] p-3 text-white rounded"
         />
       </form>
     </div>

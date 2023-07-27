@@ -24,28 +24,31 @@ const SignIn = () => {
     }
   };
   return (
-    <div className="bg-blue-50 h-screen flex items-center">
-      <form className="w-64 mx-auto mb-12" onSubmit={onSubmitHandler}>
+    <div className="flex flex-col items-end">
+      <h3 >Already a member?</h3>
+      <form className="flex flex-col items-end" onSubmit={onSubmitHandler}>
         <InputComponent
           label="Username"
+          labelCss="mr-4"
           type="text"
           name="logInUsername"
+          className="bg-transparent border border-solid border-black p-2 mb-10"
           placeholder="username"
-          className={"block w-full rounded-sm p-2 mb-2"}
           required
         />
         <InputComponent
           label="Password"
+          labelCss="mr-4"
           name="logInPassword"
           type="password"
           placeholder="password"
+          className="bg-transparent border border-solid border-black p-2 mb-5"
           required
-          className={"block w-full rounded-sm p-2 mb-2"}
         />
         <Button
           children={"Sign In"}
           type="submit"
-          className={"bg-blue-500 text-white block w-full rounded-sm"}
+          className="bg-black p-3 text-white rounded"
         />
       </form>
     </div>

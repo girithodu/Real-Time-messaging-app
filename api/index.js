@@ -1,5 +1,6 @@
 const express = require("express");
 require("dotenv").config();
+const cookieParser = require('cookie-parser');
 const morgan = require("morgan");
 const cors = require("cors");
 const app = express();
@@ -13,7 +14,9 @@ app.use(
     credentials: true,
     origin: process.env.CLIENT_URL,
   })
-);
+  );
+  // to get access to cookies a browser you need to parse cookies
+app.use(cookieParser());
 
 app.use("/", userRoute);
 const PORT = process.env.SERVER_PORT || 3000;

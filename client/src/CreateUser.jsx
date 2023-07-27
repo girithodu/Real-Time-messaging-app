@@ -1,5 +1,6 @@
 import InputComponent from "./universalComponents/InputComponent.jsx";
 import Button from "./universalComponents/button";
+import axios from "axios";
 import { useState } from "react";
 const initialValues = {
   username: "",
@@ -14,17 +15,28 @@ const CreateUser = () => {
       [name]: value,
     });
   };
+
+  const onSubmitHandler = async (e) => {
+    e.preventDefault();
+    console.log(values);
+    try {
+      const response = await axios.post("/register", values);
+      console.log(response);
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <div className="bg-blue-50 h-screen flex items-center">
-      <form className="w-64 mx-auto mb-12">
+      <form className="w-64 mx-auto mb-12" onSubmit={onSubmitHandler}>
         <InputComponent
           label="Username"
           name="username"
           type="text"
-          placeholder={'username'}
+          placeholder={"username"}
           required
           onChange={onChangeHandler}
-          className={'block w-full rounded-sm p-2 mb-2'}
+          className={"block w-full rounded-sm p-2 mb-2"}
         />
         <InputComponent
           label="Password"
@@ -33,9 +45,13 @@ const CreateUser = () => {
           placeholder="password"
           required
           onChange={onChangeHandler}
-          className={'block w-full rounded-sm p-2 mb-2'}
+          className={"block w-full rounded-sm p-2 mb-2"}
         />
-        <Button type="submit" children={"Create User"} className={'bg-blue-500 text-white block w-full rounded-sm'} />
+        <Button
+          type="submit"
+          children={"Create User"}
+          className={"bg-blue-500 text-white block w-full rounded-sm"}
+        />
       </form>
     </div>
   );

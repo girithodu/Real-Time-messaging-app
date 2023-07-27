@@ -1,12 +1,18 @@
 import InputComponent from "./universalComponents/InputComponent.jsx";
 import Button from "./universalComponents/button";
 import axios from "axios";
-import { useState } from "react";
+import {LoggedInUserContext} from './Contexts/LoggedInUserContxt.jsx';
+import { useState, useContext } from "react";
+
+
 const initialValues = {
   username: "",
   password: "",
 };
+
+
 const CreateUser = () => {
+  const {setLoggedInUser, setLoggedInUserId} = useContext(LoggedInUserContext);
   const [values, setValues] = useState(initialValues);
   const onChangeHandler = (e) => {
     const { name, value } = e.target;
@@ -21,10 +27,15 @@ const CreateUser = () => {
     console.log(values);
     try {
       const response = await axios.post("/register", values);
-      console.log(response);
+      const {data} = response;
+      const {_id,username} = data;
+      setLoggedInUserId(_id);
+      setLoggedInUser(username);
+      setValues(initialValues);
     } catch (err) {
       console.log(err);
     }
+
   };
   return (
     <div className="bg-blue-50 h-screen flex items-center">
@@ -37,15 +48,17 @@ const CreateUser = () => {
           required
           onChange={onChangeHandler}
           className={"block w-full rounded-sm p-2 mb-2"}
+          value = {values.username}
         />
         <InputComponent
           label="Password"
           name="password"
-          type="text"
+          type="password"
           placeholder="password"
           required
           onChange={onChangeHandler}
           className={"block w-full rounded-sm p-2 mb-2"}
+          value = {values.password}
         />
         <Button
           type="submit"

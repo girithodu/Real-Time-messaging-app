@@ -4,3 +4,7 @@ exports.postUser = (body) => {
   const {username, password} = body;
   return User.create({username, password});
 }
+exports.checkForUser = (body) => {
+  console.log(body);
+  return User.findOne(body);
+}

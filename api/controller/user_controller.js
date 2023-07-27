@@ -6,7 +6,7 @@ exports.createUser = (req, res) => {
     .then((createdUser) => {
       console.log("Controller", createdUser);
       const jwtSecret = process.env.JWT_SECRET;
-      jwt.sign({ userId: createdUser._id }, jwtSecret, {}, (err, token) => {
+      jwt.sign({ userId: createdUser._id,username:createdUser.username }, jwtSecret, {}, (err, token) => {
         if (err) throw err;
         console.log(token);
         res

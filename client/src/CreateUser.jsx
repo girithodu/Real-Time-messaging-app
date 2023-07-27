@@ -5,22 +5,11 @@ import {LoggedInUserContext} from './Contexts/LoggedInUserContxt.jsx';
 import { useState, useContext } from "react";
 
 
-const initialValues = {
-  username: "",
-  password: "",
-};
+
 
 
 const CreateUser = () => {
-  const {setLoggedInUser, setLoggedInUserId} = useContext(LoggedInUserContext);
-  const [values, setValues] = useState(initialValues);
-  const onChangeHandler = (e) => {
-    const { name, value } = e.target;
-    setValues({
-      ...values,
-      [name]: value,
-    });
-  };
+  const {setLoggedInUser, setLoggedInUserId, values} = useContext(LoggedInUserContext);
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
@@ -46,7 +35,6 @@ const CreateUser = () => {
           type="text"
           placeholder={"username"}
           required
-          onChange={onChangeHandler}
           className={"block w-full rounded-sm p-2 mb-2"}
           value = {values.username}
         />
@@ -56,7 +44,6 @@ const CreateUser = () => {
           type="password"
           placeholder="password"
           required
-          onChange={onChangeHandler}
           className={"block w-full rounded-sm p-2 mb-2"}
           value = {values.password}
         />

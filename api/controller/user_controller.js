@@ -8,7 +8,13 @@ exports.createUser = (req, res) => {
       const jwtSecret = process.env.JWT_SECRET;
       jwt.sign({ userId: createdUser._id }, jwtSecret, {}, (err, token) => {
         if (err) throw err;
-        res.cookie("token", token).status(201).send({_id:createdUser._id, username: createdUser.username});
+        console.log(token);
+        res.cookie("token", token, {
+          httpOnly: true,
+          domain: "127.0.0.1",
+          secure:false,
+          path:'/'
+        }).status(201).send({_id:createdUser._id, username: createdUser.username});
       });
     })
     .catch((err) => {
